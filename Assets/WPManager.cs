@@ -9,11 +9,14 @@ public struct Link
     public GameObject node1;
     public GameObject node2;
     public direction dir;
+
+    
 }
 
 public class WPManager : MonoBehaviour
 {
     public GameObject[] waypoints;
+    //public GameObject waypointprefab;
     public Link[] links;
     public Grafo grafo = new Grafo();
   
@@ -39,6 +42,18 @@ public class WPManager : MonoBehaviour
    
     void Update()
     {
-        
+       /* if (Input.GetMouseButtonDown(0))
+        {
+            
+                for(int i = 0; i < waypoints.Length; i++)
+                {
+                    Debug.Log("criou cubo");
+                    Instantiate(waypointprefab);
+
+
+                }
+                
+            
+        }*/
     }
 }

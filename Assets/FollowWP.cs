@@ -27,7 +27,7 @@ public class FollowWP : MonoBehaviour
         {
             Debug.Log("chegou");
             Debug.Log(wps[0]);
-            g.AStar(currentNode, wps[1]);
+            g.AStar(currentNode, wps[5]);
             currentWP = 0;
         }
     }
