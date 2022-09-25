@@ -23,7 +23,6 @@ public class WayPointTest : MonoBehaviour
             {
                 point = null;
                 return;
-                
             }
             
             point = point.nextPoint;

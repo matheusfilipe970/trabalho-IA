@@ -19,7 +19,7 @@ public class Grafo
         nodes.Add(node);
     }
 
-    public void addEdge(GameObject nodeInicio, GameObject nodeDestino)
+    public void AddEdge(GameObject nodeInicio, GameObject nodeDestino)
     {
         Node inicio = FindNode(nodeInicio);
         Node destino = FindNode(nodeDestino);
@@ -43,8 +43,13 @@ public class Grafo
         return null;
     }
 
-    public bool AEstrela(GameObject startId, GameObject endId)
+    public bool AStar(GameObject startId, GameObject endId)
     {
+        if(startId == endId){
+            pathList.Clear();
+            return false;
+        }
+
         Node start = FindNode(startId);
         Node end = FindNode(endId);
 
@@ -55,7 +60,7 @@ public class Grafo
 
         List<Node> open = new List<Node>();
         List<Node> closed = new List<Node>();
-        float tentativa_g_score = 0;
+        float tentative_g_score = 0;
         bool tentative_is_better;
 
         start.g = 0;
@@ -75,21 +80,20 @@ public class Grafo
 
             open.RemoveAt(i);
             closed.Add(thisNode);
-            Node vizinho;
+            Node neighbour;
             foreach(Edge e in thisNode.edgeList)
             {
-                vizinho = e.endNode;
-                if (closed.IndexOf(vizinho) > -1)
+                neighbour = e.endNode;
+                if (closed.IndexOf(neighbour) > -1)
                     continue;
 
-                tentativa_g_score = thisNode.g + distance(thisNode, vizinho);
-                if(open.IndexOf(vizinho) == -1)
+                tentative_g_score = thisNode.g + distance(thisNode, neighbour);
+                if(open.IndexOf(neighbour) == -1)
                 {
-                    open.Add(vizinho);
+                    open.Add(neighbour);
                     tentative_is_better = true;
                 }
-
-                else if (tentativa_g_score < vizinho.g)
+                else if (tentative_g_score < neighbour.g)
                 {
                     tentative_is_better = true;
                 }
@@ -100,16 +104,14 @@ public class Grafo
 
                 if (tentative_is_better)
                 {
-                    vizinho.veioDe = thisNode;
-                    vizinho.g = tentativa_g_score;
-                    vizinho.h = distance(thisNode, end);
-                    vizinho.f = vizinho.g + vizinho.h;
+                    neighbour.cameFrom = thisNode;
+                    neighbour.g = tentative_g_score;
+                    neighbour.h = distance(thisNode, end);
+                    neighbour.f = neighbour.g + neighbour.h;
                 }
             }
         }
-
         return false;
-
     }
 
     public void ReconstructPath (Node startId, Node endId)
@@ -117,10 +119,11 @@ public class Grafo
         pathList.Clear();
         pathList.Add(endId);
 
-        var p = endId.veioDe;
+        var p = endId.cameFrom;
         while (p != startId && p!= null)
         {
             pathList.Insert(0, p);
+            p = p.cameFrom;
         }
 
         pathList.Insert(0, startId);
@@ -133,22 +136,21 @@ public class Grafo
     
     int lowestF(List<Node> l)
     {
-        float lowerstf = 0;
+        float lowestf = 0;
         int count = 0;
         int iteratorCount = 0;
 
-        lowerstf = l[0].f;
+        lowestf = l[0].f;
 
         for(int i = 1; i< l.Count;i++)
         {
-            if(l[i].f<= lowerstf)
+            if(l[i].f<= lowestf)
             {
-                lowerstf = l[i].f;
+                lowestf = l[i].f;
                 iteratorCount = count;
             }
             count++;
         }
-
         return iteratorCount;
     }
 }

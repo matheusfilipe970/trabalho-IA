@@ -8,14 +8,12 @@ public class Node
     public Node path = null;
     GameObject id;
    
-
     public float f, g, h;
-    public Node veioDe; 
+    public Node cameFrom; 
 
     public Node(GameObject i)
     {
         id = i;
-   
         path = null;
     }
 

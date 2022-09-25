@@ -27,14 +27,13 @@ public class WPManager : MonoBehaviour
             }
             foreach(Link l in links)
             {
-                grafo.addEdge(l.node1, l.node2);
+                grafo.AddEdge(l.node1, l.node2);
                 if (l.dir == Link.direction.BI)
                 {
-                    grafo.addEdge(l.node2, l.node1);
+                    grafo.AddEdge(l.node2, l.node1);
                 }
             }
-        }
-        
+        }       
     }
 
    

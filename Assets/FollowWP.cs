@@ -5,7 +5,7 @@ using UnityEngine;
 public class FollowWP : MonoBehaviour
 {
     Transform goal;
-    public float speed = 10.0f;
+    public float speed = 5.0f;
     public float rotSpeed = 2.0f;
     public float accuracy = 1.0f;
 
@@ -20,15 +20,14 @@ public class FollowWP : MonoBehaviour
         wps = wpManager.GetComponent<WPManager>().waypoints;
         g = wpManager.GetComponent<WPManager>().grafo;
         currentNode = wps[0];
-
-        Invoke("GoTo", 2);
     }
 
     public void GoTo()
     {
         {
             Debug.Log("chegou");
-            g.AEstrela(currentNode, wps[2]);
+            Debug.Log(wps[0]);
+            g.AStar(currentNode, wps[1]);
             currentWP = 0;
         }
     }
@@ -36,9 +35,7 @@ public class FollowWP : MonoBehaviour
     void LateUpdate()
     {
       if (g.pathList.Count == 0 || currentWP == g.pathList.Count)
-        {
             return;
-        }
 
       if(Vector3.Distance(g.pathList[currentWP].getId().transform.position, 
           this.transform.position) < accuracy)
@@ -51,7 +48,9 @@ public class FollowWP : MonoBehaviour
         {
             goal = g.pathList[currentWP].getId().transform;
 
-            Vector3 lookAtGoal = new Vector3 (goal.position.x, this.transform.position.y, goal.position.z);
+            Vector3 lookAtGoal = new Vector3 (goal.position.x,
+            this.transform.position.y,
+            goal.position.z);
 
             Vector3 direction = lookAtGoal - this.transform.position;
             this.transform.rotation = Quaternion.Slerp(this.transform.rotation,
