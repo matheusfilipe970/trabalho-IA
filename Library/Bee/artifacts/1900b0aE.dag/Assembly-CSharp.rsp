@@ -351,13 +351,13 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
-"Assets/FollowWP.cs"
-"Assets/grafos/Edge.cs"
-"Assets/grafos/Grafo.cs"
-"Assets/grafos/Node.cs"
+"Assets/scripts/FollowWP.cs"
+"Assets/scripts/grafos/Edge.cs"
+"Assets/scripts/grafos/Grafo.cs"
+"Assets/scripts/grafos/Node.cs"
 "Assets/scripts/Point.cs"
 "Assets/scripts/WayPointTest.cs"
-"Assets/WPManager.cs"
+"Assets/scripts/WPManager.cs"
 -langversion:9.0
 
 /deterministic
